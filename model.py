@@ -51,10 +51,9 @@ class Trainer:
                 total += torch.sum(mask[:, 0, :]).item()
 
             batch_gen.reset()
-            if epoch + 1 == num_epochs:
-                torch.save(self.model.state_dict(), save_dir + "/epoch-" + str(epoch + 1) + ".model")
-                torch.save(optimizer.state_dict(), save_dir + "/epoch-" + str(epoch + 1) + ".opt")
-            print("[epoch %d]: epoch loss = %f,   acc = %f" % (epoch + 1, epoch_loss / len(batch_gen.list_of_examples),
+            torch.save(self.model.state_dict(), save_dir + "/epoch-" + str(epoch) + ".model")
+            torch.save(optimizer.state_dict(), save_dir + "/epoch-" + str(epoch) + ".opt")
+            print("[epoch %d]: epoch loss = %f,   acc = %f" % (epoch, epoch_loss / len(batch_gen.list_of_examples),
                                                                float(correct) / total))
 
     def predict(self, model_dir, results_dir, features_path, vid_list_file, epoch, actions_dict, device, sample_rate):
