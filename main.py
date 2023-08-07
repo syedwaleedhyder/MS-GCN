@@ -81,11 +81,12 @@ for i in range(1,num_splits+1):
         final_results["f1s"].append(f1s_max)
 
 if args.action == "predict":
-    print("Edits: ", final_results["edits"])
-    print("F1: ", final_results["F1"])
+    print(final_results)
+    f1s = final_results["f1s"]
+    edits = final_results["edits"]
 
     print('f1: ' + str(np.mean(f1s)))
     print('f1 sd: ' + str(np.std(f1s)))
-    print('edit: ' + str(np.mean(f1s)))
-    print('edit sd: ' + str(np.std(f1s)))
+    print('edit: ' + str(np.mean(edits)))
+    print('edit sd: ' + str(np.std(edits)))
 
