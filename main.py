@@ -4,6 +4,7 @@ from batch_gen import BatchGenerator
 import os
 import argparse
 import random
+import label_eval
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 seed = 1538574472
@@ -31,6 +32,7 @@ dil = [1,2,4,8,16,32,64,128,256,512]
 # use the full temporal resolution @ 100fps
 sample_rate = 1
 num_splits = 5
+final_results = {"edits": [], "f1s":[]}
 for i in range(1,num_splits+1):
     print("Training subject: " + str(i))
     vid_list_file = "data/" + args.dataset + "/splits_loso_validation/train.split" + str(i) + ".bundle"
@@ -63,4 +65,27 @@ for i in range(1,num_splits+1):
         trainer.train(model_dir, batch_gen, num_epochs=num_epochs, batch_size=bz, learning_rate=lr, device=device)
 
     if args.action == "predict":
-        trainer.predict(model_dir, results_dir, features_path, vid_list_file_tst, num_epochs, actions_dict, device, sample_rate)
+        edits = []
+        f1s = []
+        accs = []
+        for epoch in range(num_epochs):
+            trainer.predict(model_dir, results_dir, features_path, vid_list_file_tst, num_epochs, actions_dict, device, sample_rate)
+            edit, f1, acc = label_eval.main(split=i)
+            edits.append(edit)
+            f1s.append(f1)
+            accs.append(acc)
+        edits_argmax, edits_max = edits.index(max(edits)), max(edits)
+        f1s_argmax, f1s_max = f1s.index(max(f1s)), max(f1s)
+        accs_argmax, accs_max = accs.index(max(accs)), max(accs)
+        final_results["edits"].append(edits_max)
+        final_results["f1s"].append(f1s_max)
+
+if args.action == "predict":
+    print("Edits: ", final_results["edits"])
+    print("F1: ", final_results["F1"])
+    
+    print('f1: ' + str(np.mean(f1s)))
+    print('f1 sd: ' + str(np.std(f1s)))
+    print('edit: ' + str(np.mean(f1s)))
+    print('edit sd: ' + str(np.std(f1s)))
+

@@ -140,7 +140,7 @@ def mcc_score(recognized, ground_truth, overlap, bg_class=["background"]):
 def run_eval(split):
     parser = argparse.ArgumentParser()
 
-    parser.add_argument('--dataset', default="final_dataset_6")
+    parser.add_argument('--dataset', default="uwiom_jl")
     args = parser.parse_args()
     print(args.dataset)
     ground_truth_path = "./data/" + args.dataset + "/groundTruth_/"
@@ -201,7 +201,8 @@ def run_eval(split):
 
     print('Split '+str(split))
     print("Acc: %.4f" % (100 * float(correct) / total))
-    print('Edit: %.4f' % ((1.0 * edit) / len(list_of_videos)))
+    edit = (1.0 * edit) / len(list_of_videos)
+    print('Edit: %.4f' % (edit))
     for s in range(len(overlap)):
         precision = tp[s] / float(tp[s] + fp[s])
         recall = tp[s] / float(tp[s] + fn[s])
@@ -218,27 +219,17 @@ def run_eval(split):
     print('Frame MCC: %.4f' % (frame_mcc))
     acc = 100 * float(correct) / total
     print('\n')
-    return frame_mcc, f1, acc
+    return frame_mcc, edit, f1, acc
 
 
-def main():
+def main(split):
     score = []
     f1s = []
     mccs = []
     accs = []
-    for i in range(1,6):
-        mcc_fr, f1, acc = run_eval(i)
-        metric = ((mcc_fr * 100) + f1) / 2
-        accs.append(acc)
-        score.append(metric)
-        f1s.append(f1)
-        mccs.append(mcc_fr)
-    print('score: ' + str(np.mean(score)))
-    print('f1: ' + str(np.mean(f1s)))
-    print('f1 sd: ' + str(np.std(f1s)))
-    print('mcc: ' + str(np.mean(mccs)))
-    print('mcc sd: ' + str(np.std(mccs)))
-    print('Acc: ' + str(np.mean(accs)))
+    frame_mcc, edit, f1, acc = run_eval(split)
+    print(frame_mcc, edit, f1, acc )
+    return edit, f1, acc
 
 
 if __name__ == '__main__':
