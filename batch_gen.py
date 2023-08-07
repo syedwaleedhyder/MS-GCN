@@ -63,7 +63,7 @@ class BatchGenerator(object):
             batch_target.append(classes[::self.sample_rate])
 
         length_of_sequences = list(map(len, batch_target))
-        batch_input_tensor = torch.zeros(len(batch_input), 6, max(length_of_sequences), 9, 1, dtype=torch.float)
+        batch_input_tensor = torch.zeros(len(batch_input), 6, max(length_of_sequences), 15, 1, dtype=torch.float)
         batch_target_tensor = torch.ones(len(batch_input), max(length_of_sequences), dtype=torch.long) * (-100)
         mask = torch.zeros(len(batch_input), self.num_classes, max(length_of_sequences), dtype=torch.float)
         sample_weight = torch.ones(len(batch_input), max(length_of_sequences), dtype=torch.float)
