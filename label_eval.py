@@ -223,7 +223,6 @@ def main(args, split):
     mccs = []
     accs = []
     frame_mcc, edit, f1, acc = run_eval(args, split)
-    print(frame_mcc, edit, f1, acc )
     return edit, f1, acc
 
 
