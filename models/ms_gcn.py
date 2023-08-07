@@ -27,7 +27,7 @@ class Model(nn.Module):
     def __init__(self, in_channels=3, num_class=2, dil=[1,2,4,8,16], filters=64,
                  edge_importance_weighting=True, **kwargs):
         super(Model, self).__init__()
-        graph_args = {'layout': 'tp-vicon', 'strategy': 'spatial'}
+        graph_args = {'layout': 'uwiom', 'strategy': 'spatial'}
         # load graph
         # print('--------')
         # print(graph_args)

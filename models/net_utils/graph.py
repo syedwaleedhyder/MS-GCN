@@ -41,7 +41,13 @@ class Graph():
         return self.A
 
     def get_edge(self, layout):
-        if layout == 'tp-vicon':
+        if layout == 'uwiom':
+            self.num_node = 15
+            self_link = [(i, i) for i in range(self.num_node)]
+            neighbor_link = [[0,2], [2,4], [1,3], [3,5], [4,5], [6,8], [8,10], [12,10], [12,13], [12,11], [11,9], [9,7], [4,10], [5,11]]
+            self.edge = self_link + neighbor_link
+            self.center = 0
+        elif layout == 'tp-vicon':
             self.num_node = 9
             self_link = [(i, i) for i in range(self.num_node)]
             neighbor_link = [(1, 0), (2, 1), (3, 2), (4, 3), (5, 0), (6, 5), (7, 6), (8, 7)]
