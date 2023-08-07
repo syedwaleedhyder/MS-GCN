@@ -33,12 +33,12 @@ sample_rate = 1
 
 for i in range(1,2):
     print("Training subject: " + str(i))
-    vid_list_file = "/home/deployment/data/" + args.dataset + "/splits_loso_validation/train.split" + str(i) + ".bundle"
-    vid_list_file_tst = "/home/deployment/data/" + args.dataset + "/splits_loso_validation/test.split" + str(i) + ".bundle"
-    features_path = "/home/deployment/data/" + args.dataset + "/features7/"
-    gt_path = "/home/deployment/data/" + args.dataset + "/groundTruth_/"
+    vid_list_file = "data/" + args.dataset + "/splits_loso_validation/train.split" + str(i) + ".bundle"
+    vid_list_file_tst = "data/" + args.dataset + "/splits_loso_validation/test.split" + str(i) + ".bundle"
+    features_path = "data/" + args.dataset + "/features7/"
+    gt_path = "data/" + args.dataset + "/groundTruth_/"
 
-    mapping_file = "/home/deployment/data/" + args.dataset + "/mapping.txt"
+    mapping_file = "data/" + args.dataset + "/mapping.txt"
 
     model_dir = "./models/"+args.dataset+"/split_"+str(i)
     results_dir = "./results/"+args.dataset+"/split_"+str(i)
