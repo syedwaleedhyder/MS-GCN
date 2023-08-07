@@ -87,8 +87,8 @@ if args.action == "predict":
     f1s = final_results["f1s"]
     edits = final_results["edits"]
 
-    print('f1: ' + str(np.mean(f1s)))
-    print('f1 sd: ' + str(np.std(f1s)))
-    print('edit: ' + str(np.mean(edits)))
-    print('edit sd: ' + str(np.std(edits)))
+    print('f1:', np.round((np.mean(f1s)), decimals=2))
+    print('f1 sd:', np.round(np.std(f1s), decimals=2))
+    print('edit:', np.round(np.mean(edits), decimals=2))
+    print('edit sd:', np.round(np.std(edits), decimals=2))
 
