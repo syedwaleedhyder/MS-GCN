@@ -60,7 +60,7 @@ class Trainer:
         self.model.eval()
         with torch.no_grad():
             self.model.to(device)
-            self.model.load_state_dict(torch.load(model_dir + "/epoch-" + str(epoch) + ".model"))
+            self.model.load_state_dict(torch.load(model_dir + "/epoch-" + str(epoch) + ".model", map_location=device))
             file_ptr = open(vid_list_file, 'r')
             list_of_vids = file_ptr.read().split('\n')[:-1]
             file_ptr.close()
