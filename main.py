@@ -69,7 +69,7 @@ for i in range(1,num_splits+1):
         f1s = []
         accs = []
         for epoch in range(num_epochs):
-            trainer.predict(model_dir, results_dir, features_path, vid_list_file_tst, num_epochs, actions_dict, device, sample_rate)
+            trainer.predict(model_dir, results_dir, features_path, vid_list_file_tst, epoch, actions_dict, device, sample_rate)
             edit, f1, acc = label_eval.main(split=i)
             edits.append(edit)
             f1s.append(f1)
@@ -83,7 +83,7 @@ for i in range(1,num_splits+1):
 if args.action == "predict":
     print("Edits: ", final_results["edits"])
     print("F1: ", final_results["F1"])
-    
+
     print('f1: ' + str(np.mean(f1s)))
     print('f1 sd: ' + str(np.std(f1s)))
     print('edit: ' + str(np.mean(f1s)))
