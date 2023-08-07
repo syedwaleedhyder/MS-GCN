@@ -69,6 +69,7 @@ class Trainer:
                 string2 = vid.split('.')[0]
                 features = np.load(features_path + string2 + '.npy')
                 n = features.shape[0]
+                features = features.transpose((2, 0, 1)).reshape(3, n, 15, 1)
                 features = get_features(features)
                 features = features[:, ::sample_rate, :, :]
                 input_x = torch.tensor(features, dtype=torch.float)
