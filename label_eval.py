@@ -149,7 +149,7 @@ def run_eval(split):
 
     list_of_videos = read_file(file_list).split('\n')[:-1]
 
-    overlap=[0.5]
+    overlap=[0.1]
     tp2, fp2, fn2,tn2 = np.zeros(len(overlap)), np.zeros(len(overlap)), np.zeros(len(overlap)),np.zeros(len(overlap))
     tp, fp, fn = np.zeros(len(overlap)), np.zeros(len(overlap)), np.zeros(len(overlap))
     correct = 0
@@ -226,7 +226,7 @@ def main():
     f1s = []
     mccs = []
     accs = []
-    for i in range(1,2):
+    for i in range(1,6):
         mcc_fr, f1, acc = run_eval(i)
         metric = ((mcc_fr * 100) + f1) / 2
         accs.append(acc)
