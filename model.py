@@ -66,8 +66,9 @@ class Trainer:
             list_of_vids = file_ptr.read().split('\n')[:-1]
             file_ptr.close()
             for vid in list_of_vids:
-                string2 = vid[:-10]
-                features = np.load(features_path + string2 + 'input' + '.npy')
+                string2 = vid.split('.')[0]
+                features = np.load(features_path + string2 + '.npy')
+                n = features.shape[0]
                 features = get_features(features)
                 features = features[:, ::sample_rate, :, :]
                 input_x = torch.tensor(features, dtype=torch.float)

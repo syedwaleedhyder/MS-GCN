@@ -45,8 +45,9 @@ class BatchGenerator(object):
         batch_target = []
         for vid in batch:
             try:
-                string2 = vid[:-10]
-                features = np.load(self.features_path + string2 + 'input' + '.npy')
+                string2 = vid.split('.')[0]
+                features = np.load(self.features_path + string2 + '.npy')
+                n = features.shape[0]
                 features = get_features(features)
             except IOError:
                 print('stop')
