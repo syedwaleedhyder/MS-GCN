@@ -137,12 +137,7 @@ def mcc_score(recognized, ground_truth, overlap, bg_class=["background"]):
     return float(tp), float(fp), float(fn), float(tn)
 
 
-def run_eval(split):
-    parser = argparse.ArgumentParser()
-
-    parser.add_argument('--dataset', default="uwiom_jl")
-    args = parser.parse_args()
-    print(args.dataset)
+def run_eval(args, split):
     ground_truth_path = "./data/" + args.dataset + "/groundTruth_/"
     recog_path = "./results/" + args.dataset + "/split_" + str(split) + "/"
     file_list = "./data/" + args.dataset + "/splits_loso_validation/test.split" + str(split) + ".bundle"
@@ -222,12 +217,12 @@ def run_eval(split):
     return frame_mcc, edit, f1, acc
 
 
-def main(split):
+def main(args, split):
     score = []
     f1s = []
     mccs = []
     accs = []
-    frame_mcc, edit, f1, acc = run_eval(split)
+    frame_mcc, edit, f1, acc = run_eval(args, split)
     print(frame_mcc, edit, f1, acc )
     return edit, f1, acc
 

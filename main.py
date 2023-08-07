@@ -70,7 +70,7 @@ for i in range(1,num_splits+1):
         accs = []
         for epoch in range(num_epochs):
             trainer.predict(model_dir, results_dir, features_path, vid_list_file_tst, epoch, actions_dict, device, sample_rate)
-            edit, f1, acc = label_eval.main(split=i)
+            edit, f1, acc = label_eval.main(args=args, split=i)
             edits.append(edit)
             f1s.append(f1)
             accs.append(acc)
