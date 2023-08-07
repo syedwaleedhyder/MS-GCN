@@ -5,6 +5,7 @@ import os
 import argparse
 import random
 import label_eval
+import numpy as np
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 seed = 1538574472
@@ -69,6 +70,7 @@ for i in range(1,num_splits+1):
         f1s = []
         accs = []
         for epoch in range(num_epochs):
+            print("Epoch:", epoch)
             trainer.predict(model_dir, results_dir, features_path, vid_list_file_tst, epoch, actions_dict, device, sample_rate)
             edit, f1, acc = label_eval.main(args=args, split=i)
             edits.append(edit)
