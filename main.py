@@ -30,8 +30,8 @@ dil = [1,2,4,8,16,32,64,128,256,512]
 
 # use the full temporal resolution @ 100fps
 sample_rate = 1
-
-for i in range(1,2):
+num_splits = 5
+for i in range(1,num_splits+1):
     print("Training subject: " + str(i))
     vid_list_file = "data/" + args.dataset + "/splits_loso_validation/train.split" + str(i) + ".bundle"
     vid_list_file_tst = "data/" + args.dataset + "/splits_loso_validation/test.split" + str(i) + ".bundle"
